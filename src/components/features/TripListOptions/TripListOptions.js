@@ -7,24 +7,16 @@ import {Row, Col} from 'react-flexbox-grid';
 class TripListOptions extends React.Component {
   handleTags(tag, checked){
     if(checked) {
-      console.log('Adding tag', tag);
-      // TODO - use action dispatcher from props
-      this.props.addTags(tag);
+      this.props.addTag(tag);
     } else {
-      console.log('Removing tag', tag);
-      // TODO - use action dispatcher from props
-      this.props.removeTags(tag);
+      this.props.removeTag(tag);
     }
   }
 
   handleDuration(type, value){
-    console.log('Changing duration', type, value);
-    // TODO - use action dispatcher from props
-    if(type == 'form'){
-      this.props.changeDurationFrom(value);
-    } else {
-      this.props.changeDurationTo(value);
-    }
+    const durationChange = {};
+    durationChange[type] = parseInt(value);
+    this.props.changeDuration(durationChange);
   }
 
   handleSearch(phrase){
@@ -32,18 +24,18 @@ class TripListOptions extends React.Component {
   }
 
   render(){
-    const {tags, filters} = this.props;
+    const {tags, filters, regions} = this.props;
     return (
       <div className={styles.component}>
         <Row around="lg">
-          <Col lg={4}>
+          <Col lg={3}>
             <div className={styles.filter}>
               <label>
                 <input className={`${styles.input} ${styles.search}`} type='text' placeholder='Search...' value={filters.phrase} onChange={event => this.handleSearch(event.currentTarget.value)} />
               </label>
             </div>
           </Col>
-          <Col lg={4}>
+          <Col lg={3}>
             <div className={styles.filter}>
               <label>
                 Duration from:
@@ -55,7 +47,7 @@ class TripListOptions extends React.Component {
               </label>
             </div>
           </Col>
-          <Col lg={4}>
+          <Col lg={3}>
             <div className={styles.filter}>
               <details>
                 <summary className={styles.toggle}>Filter by tags</summary>
@@ -70,6 +62,20 @@ class TripListOptions extends React.Component {
               </details>
             </div>
           </Col>
+          <Col lg={3}>
+            <div className={styles.filter}>
+              <select
+                className={`${styles.input} ${styles.select}`}
+                value={filters.region}
+                onChange={event => this.props.changeRegion(event.currentTarget.value)}
+              >
+                <option key='null' value=''>All regions</option>
+                {Object.keys(regions).map(region => (
+                  <option key={region} value={region}>{region}</option>
+                ))}
+              </select>
+            </div>
+          </Col>
         </Row>
       </div>
     );
@@ -78,12 +84,13 @@ class TripListOptions extends React.Component {
 
 TripListOptions.propTypes = {
   tags: PropTypes.object,
+  regions: PropTypes.object,
   filters: PropTypes.object,
   changeSearchPhrase: PropTypes.func,
-  addTags: PropTypes.func,
-  removeTags: PropTypes.func,
-  changeDurationFrom: PropTypes.func,
-  changeDurationTo: PropTypes.func,
+  changeDuration: PropTypes.func,
+  addTag: PropTypes.func,
+  removeTag: PropTypes.func,
+  changeRegion: PropTypes.func,
 };
 
 export default TripListOptions;
