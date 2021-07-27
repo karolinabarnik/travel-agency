@@ -4,27 +4,27 @@ import {Row, Col } from 'react-flexbox-grid';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import pricing from '../../../data/pricing.json';
 import OrderOption from '../OrderOption/OrderOption';
-import {calculateTotal} from '../../../utils/calculateTotal';
-import {formatPrice} from '../../../utils/formatPrice';
-import settings from '../../../data/settings';
+//import {calculateTotal} from '../../../utils/calculateTotal';
+//import {formatPrice} from '../../../utils/formatPrice';
+//import settings from '../../../data/settings'
 import Button from '../../common/Button/Button';
 
-const sendOrder = (options, tripCost, tripName, tripId, tripCountryCode) => {
-  const totalCost = formatPrice(calculateTotal(tripCost, options));
-
-  const payload = {
-    ...options,
-    totalCost,
-    tripName,
-    tripId,
-    tripCountryCode,
-  };
-
+const sendOrder = () => {
+  // const totalCost = formatPrice(calculateTotal(tripCost, options));
+};
+/*const payload = {
+  ...options,
+  totalCost,
+  tripName,
+  tripId,
+  tripCountryCode,
+};
+/*
   if(options.name === '' || options.contact === ''){
     alert('Enter your name and contact details');
   }
 
-  const url = settings.db.url + '/' + settings.db.endpoint.orders;
+  /*const url = settings.db.url + '/' + settings.db.endpoint.orders;
 
   const fetchOptions = {
     cache: 'no-cache',
@@ -40,8 +40,8 @@ const sendOrder = (options, tripCost, tripName, tripId, tripCountryCode) => {
       return response.json();
     }).then(function(parsedResponse){
       console.log('parsedResponse', parsedResponse);
-    });
-};
+    });*/
+
 
 const OrderForm = ({tripCost, options, setOrderOption, tripName, tripId, tripCountryCode}) => (
   <Row>
