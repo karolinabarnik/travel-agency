@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '/OrderOption.scss';
+import styles from './OrderOption.scss';
 import PropTypes from 'prop-types';
 
 const newValueSet = (currentValue, id, checked) => {
@@ -23,6 +23,7 @@ const OrderOptionCheckboxes = ({values, currentValue, setOptionValue}) => (
           checked={currentValue.includes(value.id) ? true : false}
           onChange={event => setOptionValue(newValueSet(currentValue, value.id, event.currentTarget.checked))}>
         </input>
+        {value.name}
       </label>
     ))}
   </div>

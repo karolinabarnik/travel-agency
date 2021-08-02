@@ -1,20 +1,25 @@
 import React from 'react';
-import styles from '/OrderOption.scss';
+import styles from './OrderOption.scss';
 import PropTypes from 'prop-types';
 import { formatPrice } from '../../../utils/formatPrice';
+import Icon from './../../common/Icon/Icon';
 
 
 const OrderOptionIcons = ({values, required, currentValue, setOptionValue}) => (
   <div
     className={styles.icon}
-    value={currentValue}
-    onClick={event => setOptionValue(event.id)}
   >
     {required ? '' : (
-      <option key='null' value=''>---</option>
+      <div key='null' onClick={() => setOptionValue('')} >---</div>
     )}
     {values.map(value => (
-      <option key={value.id} value={value.id}>{value.name} ({formatPrice(value.price)})</option>
+      <div 
+        className={styles.icon + ((value.id === currentValue) ? ' ' + styles.iconActive : '')} 
+        key={value.id}
+        onClick={() => setOptionValue(value.id)}>
+        <Icon name={value.icon} />
+        {value.name} ({formatPrice(value.price)})
+      </div>
     ))}
   </div>
 );
