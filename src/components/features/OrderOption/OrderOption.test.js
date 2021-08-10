@@ -1,6 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import OrderOption from './OrderOption';
+import DatePicker from 'react-datepicker';
 
 describe('Component OrderOption', () => {
   it('should render without crashing', () => {
@@ -19,7 +20,7 @@ describe('Component OrderOption', () => {
     const expectedType = 'text';
     const component = shallow(<OrderOption name={expectedTitle} type={expectedType} />);
     
-    expect(component.find('title').text()).toEqual(expectedTitle);
+    expect(component.find('.title').text()).toEqual(expectedTitle);
     
   });   
 
@@ -171,26 +172,26 @@ describe('Component OrderOption', () => {
           });
 
           it('should run setOrderOption function on change', () => {
-            renderedSubcomponent.find('input[type="text"]').simulate('change', {currentTarget: {value: testValue}});
+            renderedSubcomponent.find('input[type="text"]').simulate('change', { target: {value: testValue}});
             expect(mockSetOrderOption).toBeCalledTimes(1);
             expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
           });
           break;
         }
 
-       // case 'date': {
-        //  it('contains DatePicker', () => {
-         //   const datepicker = renderedSubcomponent.find(DatePicker);
-        //    expect(datepicker.length).toBe(1);
-       //   });
+       case 'date': {
+          it('contains DatePicker', () => {
+            const datepicker = renderedSubcomponent.find(DatePicker);
+            expect(datepicker.length).toBe(1);
+          });
 
-       //   it('should run setOrderOption function on change', () => {
-       //     renderedSubcomponent.find(DatePicker).simulate('change', testValue);
-//expect(mockSetOrderOption).toBeCalledTimes(1);
-         //   expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
-        //  });
-       //   break;
-       // }
+          it('should run setOrderOption function on change', () => {
+            renderedSubcomponent.find(DatePicker).simulate('change', testValue);
+            expect(mockSetOrderOption).toBeCalledTimes(1);
+            expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
+          });
+          break;
+       }
       }
 
     });
