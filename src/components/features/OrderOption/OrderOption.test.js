@@ -141,13 +141,13 @@ describe('Component OrderOption', () => {
             expect(input.length).toBe(1);
           });
 
-         // it('should run setOrderOption function on change', () => {
-           // renderedSubcomponent.find('input[type="number"]').simulate('change', {currentTarget: {value: testValueNumber}});
-           // expect(mockSetOrderOption).toBeCalledTimes(1);
-           // expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValueNumber });
-         // });
+          // it('should run setOrderOption function on change', () => {
+          // renderedSubcomponent.find('input[type="number"]').simulate('change', {currentTarget: {value: testValueNumber}});
+          // expect(mockSetOrderOption).toBeCalledTimes(1);
+          // expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValueNumber });
+          // });
           break;
-       }
+        }
         case 'checkbox': {
           it('contains input with type="checkbox"', () => {
             const input = renderedSubcomponent.find('input[type="checkbox"]');
@@ -179,7 +179,7 @@ describe('Component OrderOption', () => {
           break;
         }
 
-       case 'date': {
+        case 'date': {
           it('contains DatePicker', () => {
             const datepicker = renderedSubcomponent.find(DatePicker);
             expect(datepicker.length).toBe(1);
@@ -191,7 +191,7 @@ describe('Component OrderOption', () => {
             expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
           });
           break;
-       }
+        }
       }
 
     });
